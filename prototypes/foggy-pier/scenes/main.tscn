@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1foggy0main00"]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="Shader" path="res://scripts/fog.gdshader" id="2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fog"]
+shader = ExtResource("2")
+shader_parameter/fog_color = Color(0.62, 0.66, 0.72, 1)
+shader_parameter/density = 0.55
+shader_parameter/scroll_speed = 0.02
+shader_parameter/scale = 3.0
+shader_parameter/vignette = 0.4
+
+[node name="Main" type="Node2D"]
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.46, 0.52, 0.62, 1)
+
+[node name="Water" type="Polygon2D" parent="."]
+color = Color(0.07, 0.12, 0.16, 1)
+polygon = PackedVector2Array(-3000, -3000, 3000, -3000, 3000, 3000, -3000, 3000)
+
+[node name="PierDeck" type="Polygon2D" parent="."]
+color = Color(0.27, 0.2, 0.13, 1)
+polygon = PackedVector2Array(-72, -440, 72, -440, 72, 240, -72, 240)
+
+[node name="PlankSeam1" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-72, -360, 72, -360, 72, -357, -72, -357)
+
+[node name="PlankSeam2" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-72, -240, 72, -240, 72, -237, -72, -237)
+
+[node name="PlankSeam3" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-72, -120, 72, -120, 72, -117, -72, -117)
+
+[node name="PlankSeam4" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-72, 0, 72, 0, 72, 3, -72, 3)
+
+[node name="PlankSeam5" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-72, 120, 72, 120, 72, 123, -72, 123)
+
+[node name="CenterSeam" type="Polygon2D" parent="."]
+color = Color(0.19, 0.13, 0.08, 1)
+polygon = PackedVector2Array(-1.5, -440, 1.5, -440, 1.5, 240, -1.5, 240)
+
+[node name="PostNW" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(-80, -448, -64, -448, -64, -432, -80, -432)
+
+[node name="PostNE" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(64, -448, 80, -448, 80, -432, 64, -432)
+
+[node name="PostMidW" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(-80, -120, -64, -120, -64, -104, -80, -104)
+
+[node name="PostMidE" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(64, -120, 80, -120, 80, -104, 64, -104)
+
+[node name="PostSW" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(-80, 224, -64, 224, -64, 240, -80, 240)
+
+[node name="PostSE" type="Polygon2D" parent="."]
+color = Color(0.15, 0.1, 0.07, 1)
+polygon = PackedVector2Array(64, 224, 80, 224, 80, 240, 64, 240)
+
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(0, 60)
+
+[node name="FogLayer" type="CanvasLayer" parent="."]
+
+[node name="Fog" type="ColorRect" parent="FogLayer"]
+material = SubResource("ShaderMaterial_fog")
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
