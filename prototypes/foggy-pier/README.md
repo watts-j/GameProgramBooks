@@ -7,10 +7,12 @@ a vignetted, moonlit dark. It exists to prove the toolchain works and to set the
 at dusk.
 
 It's drawn in a **3/4 perspective** the cheap-but-honest way: an angled
-landmass with a visible cliff/side face, an upright "billboard" figure, and
-**Y-sorting** so you pass *behind* far mooring posts and *in front of* near
-ones. The walkable surface (island + pier) is fenced by a collision boundary,
-so **you can't walk off into the water** — you slide along the edge instead.
+landmass with a visible cliff/side face, a pier that **tapers and foreshortens
+as it recedes** into the water (matching the island's projection), an upright
+"billboard" figure, and **Y-sorting** so you pass *behind* far mooring posts
+and *in front of* near ones. The walkable surface (island + pier) is fenced by
+a collision boundary, so **you can't walk off into the water** — you slide
+along the edge instead.
 
 This is a **scaffold**, not a game yet. Everything visual is placeholder
 geometry (colored polygons), meant to be swapped for real art later.
