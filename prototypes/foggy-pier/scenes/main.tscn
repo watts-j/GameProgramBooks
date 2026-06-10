@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1foggy0main00"]
+[gd_scene load_steps=6 format=3 uid="uid://b1foggy0main00"]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
 [ext_resource type="Shader" path="res://scripts/fog.gdshader" id="2"]
@@ -6,74 +6,151 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fog"]
 shader = ExtResource("2")
 shader_parameter/fog_color = Color(0.62, 0.66, 0.72, 1)
-shader_parameter/density = 0.55
+shader_parameter/density = 0.5
 shader_parameter/scroll_speed = 0.02
 shader_parameter/scale = 3.0
 shader_parameter/vignette = 0.4
 
+[sub_resource type="Gradient" id="Gradient_lamp"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.84, 0.55, 1, 1, 0.72, 0.42, 0.5, 1, 0.84, 0.55, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lamp"]
+gradient = SubResource("Gradient_lamp")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="Main" type="Node2D"]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.46, 0.52, 0.62, 1)
+color = Color(0.42, 0.48, 0.58, 1)
 
 [node name="Water" type="Polygon2D" parent="."]
-color = Color(0.07, 0.12, 0.16, 1)
+color = Color(0.06, 0.1, 0.14, 1)
 polygon = PackedVector2Array(-3000, -3000, 3000, -3000, 3000, 3000, -3000, 3000)
 
+[node name="IslandCliff" type="Polygon2D" parent="."]
+color = Color(0.08, 0.08, 0.06, 1)
+polygon = PackedVector2Array(-300, -12, 300, -12, 520, 348, -520, 348)
+
+[node name="IslandTop" type="Polygon2D" parent="."]
+color = Color(0.15, 0.19, 0.13, 1)
+polygon = PackedVector2Array(-300, -40, 300, -40, 520, 320, -520, 320)
+
+[node name="ShorelineL" type="Polygon2D" parent="."]
+color = Color(0.32, 0.28, 0.21, 1)
+polygon = PackedVector2Array(-300, -46, -70, -46, -70, -40, -300, -40)
+
+[node name="ShorelineR" type="Polygon2D" parent="."]
+color = Color(0.32, 0.28, 0.21, 1)
+polygon = PackedVector2Array(70, -46, 300, -46, 300, -40, 70, -40)
+
+[node name="PierSideFace" type="Polygon2D" parent="."]
+color = Color(0.13, 0.09, 0.05, 1)
+polygon = PackedVector2Array(-70, -410, 70, -410, 70, -30, -70, -30)
+
 [node name="PierDeck" type="Polygon2D" parent="."]
-color = Color(0.27, 0.2, 0.13, 1)
-polygon = PackedVector2Array(-72, -440, 72, -440, 72, 240, -72, 240)
+color = Color(0.32, 0.23, 0.14, 1)
+polygon = PackedVector2Array(-70, -420, 70, -420, 70, -40, -70, -40)
 
 [node name="PlankSeam1" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-72, -360, 72, -360, 72, -357, -72, -357)
+color = Color(0.2, 0.14, 0.08, 1)
+polygon = PackedVector2Array(-70, -340, 70, -340, 70, -337, -70, -337)
 
 [node name="PlankSeam2" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-72, -240, 72, -240, 72, -237, -72, -237)
+color = Color(0.2, 0.14, 0.08, 1)
+polygon = PackedVector2Array(-70, -250, 70, -250, 70, -247, -70, -247)
 
 [node name="PlankSeam3" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-72, -120, 72, -120, 72, -117, -72, -117)
+color = Color(0.2, 0.14, 0.08, 1)
+polygon = PackedVector2Array(-70, -160, 70, -160, 70, -157, -70, -157)
 
 [node name="PlankSeam4" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-72, 0, 72, 0, 72, 3, -72, 3)
-
-[node name="PlankSeam5" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-72, 120, 72, 120, 72, 123, -72, 123)
+color = Color(0.2, 0.14, 0.08, 1)
+polygon = PackedVector2Array(-70, -70, 70, -70, 70, -67, -70, -67)
 
 [node name="CenterSeam" type="Polygon2D" parent="."]
-color = Color(0.19, 0.13, 0.08, 1)
-polygon = PackedVector2Array(-1.5, -440, 1.5, -440, 1.5, 240, -1.5, 240)
+color = Color(0.2, 0.14, 0.08, 1)
+polygon = PackedVector2Array(-1.5, -420, 1.5, -420, 1.5, -40, -1.5, -40)
 
-[node name="PostNW" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(-80, -448, -64, -448, -64, -432, -80, -432)
+[node name="Boundary" type="StaticBody2D" parent="."]
 
-[node name="PostNE" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(64, -448, 80, -448, 80, -432, 64, -432)
+[node name="Edge" type="CollisionPolygon2D" parent="Boundary"]
+build_mode = 1
+polygon = PackedVector2Array(-70, -420, 70, -420, 70, -40, 300, -40, 520, 320, -520, 320, -300, -40, -70, -40)
 
-[node name="PostMidW" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(-80, -120, -64, -120, -64, -104, -80, -104)
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="PostMidE" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(64, -120, 80, -120, 80, -104, 64, -104)
+[node name="PostFL" type="Polygon2D" parent="YSort"]
+position = Vector2(-64, -408)
+color = Color(0.16, 0.11, 0.07, 1)
+polygon = PackedVector2Array(-6, 8, 6, 8, 6, -34, 8, -40, -8, -40, -6, -34)
 
-[node name="PostSW" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(-80, 224, -64, 224, -64, 240, -80, 240)
+[node name="PostFR" type="Polygon2D" parent="YSort"]
+position = Vector2(64, -408)
+color = Color(0.16, 0.11, 0.07, 1)
+polygon = PackedVector2Array(-6, 8, 6, 8, 6, -34, 8, -40, -8, -40, -6, -34)
 
-[node name="PostSE" type="Polygon2D" parent="."]
-color = Color(0.15, 0.1, 0.07, 1)
-polygon = PackedVector2Array(64, 224, 80, 224, 80, 240, 64, 240)
+[node name="PostML" type="Polygon2D" parent="YSort"]
+position = Vector2(-64, -150)
+color = Color(0.16, 0.11, 0.07, 1)
+polygon = PackedVector2Array(-6, 8, 6, 8, 6, -34, 8, -40, -8, -40, -6, -34)
 
-[node name="Player" parent="." instance=ExtResource("1")]
-position = Vector2(0, 60)
+[node name="PostMR" type="Polygon2D" parent="YSort"]
+position = Vector2(64, -150)
+color = Color(0.16, 0.11, 0.07, 1)
+polygon = PackedVector2Array(-6, 8, 6, 8, 6, -34, 8, -40, -8, -40, -6, -34)
+
+[node name="CrateA" type="Node2D" parent="YSort"]
+position = Vector2(-180, 30)
+
+[node name="Box" type="Polygon2D" parent="YSort/CrateA"]
+color = Color(0.31, 0.22, 0.13, 1)
+polygon = PackedVector2Array(-20, 0, 20, 0, 20, -34, -20, -34)
+
+[node name="Lid" type="Polygon2D" parent="YSort/CrateA"]
+color = Color(0.39, 0.29, 0.18, 1)
+polygon = PackedVector2Array(-20, -34, 20, -34, 20, -28, -20, -28)
+
+[node name="CrateB" type="Node2D" parent="YSort"]
+position = Vector2(-150, 64)
+
+[node name="Box" type="Polygon2D" parent="YSort/CrateB"]
+color = Color(0.31, 0.22, 0.13, 1)
+polygon = PackedVector2Array(-16, 0, 16, 0, 16, -28, -16, -28)
+
+[node name="Lid" type="Polygon2D" parent="YSort/CrateB"]
+color = Color(0.39, 0.29, 0.18, 1)
+polygon = PackedVector2Array(-16, -28, 16, -28, 16, -23, -16, -23)
+
+[node name="LampPost" type="Node2D" parent="YSort"]
+position = Vector2(150, -10)
+
+[node name="Pole" type="Polygon2D" parent="YSort/LampPost"]
+color = Color(0.11, 0.11, 0.13, 1)
+polygon = PackedVector2Array(-3, 6, 3, 6, 3, -70, -3, -70)
+
+[node name="Housing" type="Polygon2D" parent="YSort/LampPost"]
+color = Color(0.18, 0.17, 0.16, 1)
+polygon = PackedVector2Array(-8, -70, 8, -70, 6, -88, -6, -88)
+
+[node name="Flame" type="Polygon2D" parent="YSort/LampPost"]
+color = Color(1, 0.82, 0.5, 1)
+polygon = PackedVector2Array(-4, -72, 4, -72, 3, -86, -3, -86)
+
+[node name="Glow" type="PointLight2D" parent="YSort/LampPost"]
+position = Vector2(0, -79)
+color = Color(1, 0.83, 0.55, 1)
+energy = 1.1
+texture = SubResource("GradientTexture2D_lamp")
+texture_scale = 2.2
+
+[node name="Player" parent="YSort" instance=ExtResource("1")]
+position = Vector2(0, -180)
 
 [node name="FogLayer" type="CanvasLayer" parent="."]
 
